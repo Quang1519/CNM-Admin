@@ -101,7 +101,8 @@
                                         <thead class="table-purple">
                                         <tr>
                                             <!-- <th data-sort-ignore="true" class="min-width"></th> -->
-                                            <th data-sort-initial="true" data-toggle="true"  class="text-dark min-width">STT</th>
+                                            <!-- <th data-sort-initial="true" data-toggle="true"  class="text-dark min-width">STT</th> -->
+                                            <th data-sort-ignore="true" class="text-dark min-width">STT</th>
                                             <th data-sort-ignore="true" class="text-dark">MSSV</th>
                                             <th data-sort-ignore="true" class="text-dark">Họ và tên </th>
                                             <th data-sort-ignore="true" class="text-dark">Tên</th>
