@@ -15,7 +15,7 @@
 
 <?php
 
-if(empty($_SESSION['username']) || $_SESSION['phanquyen'] != '' || empty($_SESSION['ten'])){
+if(empty($_SESSION['username']) || $_SESSION['phanquyen'] != 1 || empty($_SESSION['ten'])){
   if($this->active != 'login'){
     echo '<script type="text/javascript">window.location="login.html"</script>';
   }

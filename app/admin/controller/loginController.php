@@ -10,7 +10,7 @@
 
         if($account){
           foreach( $account as $val){
-            if($val['username'] == $username && $val['password'] == $password && $val['phanquyen'] == 0){
+            if($val['username'] == $username && $val['password'] == $password && $val['phanquyen'] == 1){
               $_SESSION['username'] = $val['username'];
               $_SESSION['phanquyen'] = $val['phanquyen'];
               $_SESSION['ten'] = $val['ten'];
