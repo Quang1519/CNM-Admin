@@ -56,7 +56,7 @@
                 <li>
                     <a href="addUsers.html" class="waves-effect">
                     <i class="remixicon-add-circle-line "></i>
-                    <span>Thêm tài khoản</span>
+                    <span>Quản lý tài khoản</span>
                     </a>
                 </li>
 

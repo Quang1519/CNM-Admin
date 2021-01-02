@@ -54,6 +54,24 @@ class adminModel extends Model {
     }
   }
 
+  public function updateUser($data){
+    $message = "Cập nhật tài khoản";
+    // unset($data['mssv']);
+    unset($data['password']);
+    unset($data['username']);
+    $url = $this->makeUrl("taikhoan/update/", $data);
+    // echo $url;
+    // print_r($data);
+    // die();
+    $result = $this->themxoasua($url);
+    if($result){
+      return [1, $message];
+    }
+    else {
+      return [0, $message];
+    }
+  }
+
   public function getEvent(){
     $url = $this->makeUrl("sukien");
     return $this->loaddulieu($url);

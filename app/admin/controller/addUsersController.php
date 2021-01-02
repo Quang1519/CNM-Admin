@@ -18,7 +18,14 @@
         $data['username'] = $_REQUEST['mssv'];
 
         $data['lop'] = $_REQUEST['lop'];
-        $this->view->message = $this->model->addUser($data);
+
+        if($_REQUEST['create'] == 'New'){
+          $this->view->message = $this->model->addUser($data);
+        }
+        else{
+          $this->view->message = $this->model->updateUser($data);
+        }
+
 
       }
 

@@ -87,7 +87,7 @@
                                                     <button id="demo-btn-addrow" class="btn btn-primary"><i class="mdi mdi-plus-circle mr-2"></i> Add New Row</button>
                                                 </div> -->
                                                 <div class="form-group mr-2">
-                                                    <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal"><i class="mdi mdi-plus-circle mr-2"></i> Tạo tài khoản mới</button>
+                                                    <button type="button" id="addUser" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#update-modal"><i class="mdi mdi-plus-circle mr-2"></i> Tạo tài khoản mới</button>
                                                 </div>
                                                 <div class="form-group">
                                                     <input id="demo-input-search2" type="text" placeholder="Tìm kiếm" class="form-control" autocomplete="off">
@@ -104,13 +104,15 @@
                                             <!-- <th data-sort-initial="true" data-toggle="true"  class="text-dark min-width">STT</th> -->
                                             <th data-sort-ignore="true" class="text-dark min-width">STT</th>
                                             <th data-sort-ignore="true" class="text-dark">MSSV</th>
-                                            <th data-sort-ignore="true" class="text-dark">Họ và tên </th>
+                                            <th data-sort-ignore="true" class="text-dark">Họ và tên</th>
                                             <th data-sort-ignore="true" class="text-dark">Tên</th>
+                                            <th data-sort-ignore="true" class="text-dark">Giới tính</th>
                                             <th data-sort-ignore="true" class="text-dark">Ngày sinh</th>
                                             <th data-sort-ignore="true" class="text-dark">Lớp</th>
                                             <th data-sort-ignore="true" class="text-dark">Khoa</th>
                                             <th data-sort-ignore="true" class="text-dark">Ngành</th>
                                             <th data-sort-ignore="true" class="text-dark">Trạng thái</th>
+                                            <th data-sort-ignore="true" class="text-dark">Cập nhật</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -119,7 +121,7 @@
                                         </tbody>
                                         <tfoot>
                                         <tr class="active">
-                                            <td colspan="9">
+                                            <td colspan="11">
                                                 <div class="text-right">
                                                     <ul class="pagination pagination-split justify-content-end footable-pagination m-t-10"></ul>
                                                 </div>
@@ -133,7 +135,7 @@
                         </div>
 
                         <!-- Modal here -->
-                        <div id="con-close-modal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div id="update-modal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header d-block">
@@ -147,7 +149,7 @@
                                           <div class="col-md-6">
                                               <div class="form-group">
                                                   <label for="field-1" class="control-label">Họ và tên đệm</label>
-                                                  <input type="text" class="form-control" id="field-1" placeholder="Phạm Thái" name="hovatendem" required>
+                                                  <input type="text" class="form-control" id="hovatendem" placeholder="Phạm Thái" name="hovatendem" required>
                                                   <div class="invalid-feedback">
                                                     Vui lòng điền họ và tên đệm
                                                   </div>
@@ -156,7 +158,7 @@
                                           <div class="col-md-6">
                                               <div class="form-group">
                                                   <label for="field-2" class="control-label">Tên</label>
-                                                  <input type="text" class="form-control" id="field-2" placeholder="Văn" name="ten" required>
+                                                  <input type="text" class="form-control" id="ten" placeholder="Văn" name="ten" required>
                                                   <div class="invalid-feedback">
                                                     Vui lòng điền tên
                                                   </div>
@@ -187,7 +189,7 @@
                                             <div class="form-group">
                                               <label class="control-label ">Ngày sinh</label>
                                                   <!-- <div class="input-group"> -->
-                                                      <input type="text" class="form-control" data-provide="datepicker" data-date-autoclose="true" placeholder="dd/mm/yyyy" id="date" name="ngaysinh" required>
+                                                      <input type="text" class="form-control" data-provide="datepicker" data-date-autoclose="true" placeholder="dd/mm/yyyy" id="ngay" name="ngaysinh" required>
                                                       <div class="invalid-feedback">
                                                         Vui lòng điền ngày tháng năm sinh
                                                       </div>
@@ -199,7 +201,7 @@
                                           <div class="col-md-6">
                                               <div class="form-group">
                                                   <label for="field-4" class="control-label">MSSV</label>
-                                                  <input type="text" class="form-control" id="field-4" placeholder="17059601" name="mssv" required>
+                                                  <input type="text" class="form-control" id="mssv" placeholder="17059601" name="mssv" required>
                                                   <div class="invalid-feedback">
                                                     Vui lòng điền mã số sinh viên
                                                   </div>
@@ -208,7 +210,7 @@
                                           <div class="col-md-6">
                                               <div class="form-group">
                                                   <label for="field-5" class="control-label">Lớp</label>
-                                                  <input type="text" class="form-control" id="field-5" placeholder="DHHTTT13B" name="lop" required>
+                                                  <input type="text" class="form-control" id="lop" placeholder="DHHTTT13B" name="lop" required>
                                                   <div class="invalid-feedback">
                                                     Vui lòng điền lớp học
                                                   </div>
@@ -264,7 +266,7 @@
                                   </div>
                                   <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Đóng</button>
-                                      <button type="submit" name="create" class="btn btn-success waves-effect waves-light">Thêm mới</button>
+                                      <button type="submit" name="create" id="create" class="btn btn-success waves-effect waves-light">Thêm mới</button>
                                   </div>
                                   </form>
                               </div>
@@ -304,6 +306,72 @@
         <!-- <script src="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\select2\select2.min.js"></script> -->
         <!-- <script src="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\bootstrap-select\bootstrap-select.min.js"></script> -->
         <!-- <script src="<?php echo constant("DIR_APP") ?>admin\view\assets\js\pages\form-advanced.init.js"></script> -->
+
+        <script>
+
+            // var dienra = $("#con-close-modal .modal-body #remove");
+
+            $(".btn-icon").on("click", function () {
+                // console.log(this);
+                var myValue = $(this).data('val');
+                // $(".modal-body #bookId").val( myBookId );
+
+                var obj = $("#update-modal");
+
+                // var time = myValue.ngaysinh.split("-");
+
+
+                // $(obj).find(".modal-body #add").append(dienra);
+
+                if(myValue.gioitinh == 1){
+                    $(obj).find(".modal-body #customRadio1").prop( "checked", true );
+                }
+                else{
+                    $(obj).find(".modal-body #customRadio2").prop( "checked", true );
+                }
+                // console.log(dienra);
+                // console.log(test[0]);
+                // var hi = test[0];
+                // var start = hi.trim().slice(-2,2);
+                $(obj).find(".modal-header .modal-title").text("Cập nhật tài khoản");
+                $(obj).find(".modal-footer #create").text("Cập nhật");
+                $(obj).find(".modal-footer #create").prop('value', '');
+                // console.log(start);
+                $(obj).find(".modal-body #mssv").prop( "readonly", true );
+                $(obj).find(".modal-body #mssv").val(myValue.mssv);
+                $(obj).find(".modal-body #hovatendem").val(myValue.hovaten);
+                $(obj).find(".modal-body #ten").val(myValue.ten);
+                $(obj).find(".modal-body #ngay").val(myValue.ngaysinh);
+                $(obj).find(".modal-body #lop").val(myValue.lop);
+                $(obj).find(".modal-body #khoa").val(myValue.khoa);
+                $(obj).find(".modal-body #nganh").val(myValue.nganh);
+
+            });
+
+
+            $("#addUser").on("click", function () {
+                // console.log(this);
+                // var myValue = $(this).data('val');
+                // $(".modal-body #bookId").val( myBookId );
+                var obj = $("#update-modal");
+                // $(obj).find(".modal-body #remove").remove();
+
+
+                $(obj).find(".modal-header .modal-title").text("Thêm tài khoản");
+                $(obj).find(".modal-footer #create").text("Thêm mới");
+                $(obj).find(".modal-footer #create").prop('value', 'New');
+                // $(".hidden").attr("placeholder", "Type here to search");
+                $(obj).find(".modal-body #mssv").val('').attr("placeholder", "17000000");
+                $(obj).find(".modal-body #hovatendem").val('').attr("placeholder", "Nguyễn Bảo");
+                $(obj).find(".modal-body #ten").val('').attr("placeholder", "Trúc");
+                $(obj).find(".modal-body #ngay").val('').attr("placeholder", "02/02/2000");
+                $(obj).find(".modal-body #lop").val('').attr("placeholder", "DHHTTT13A");
+                $(obj).find(".modal-body #khoa").val('').attr("placeholder", "Công Nghệ Thông Tin");
+                $(obj).find(".modal-body #nganh").val('').attr("placeholder", "Hệ Thống Thông Tin");
+
+            });
+
+        </script>
 
         <?php THONGBAO::message($this->message)?>
 
