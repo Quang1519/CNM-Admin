@@ -97,13 +97,18 @@ class adminModel extends Model {
       if($val['trangthai'] == 1){
         $mask = $val['masukien'];
         $count++;
+        // echo $count;
+        // print_r($data);
+        // print_r($val);
+
       }
     }
+    // die();
     if($count>0 && $mask != $data['masukien'] && $data['trangthai'] == 1){
       return [0, $message];
     }
     else{
-      return $this->event($data, $action, $message);
+      return $this->Event($data, $action, $message);
     }
   }
 

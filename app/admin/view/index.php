@@ -32,20 +32,31 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
-                                    <div class="page-title-right">
+                                    <!-- <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Minton</a></li>
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
                                             <li class="breadcrumb-item active">Starter</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Starter</h4>
+                                    <h4 class="page-title">Starter</h4> -->
                                 </div>
                             </div>
                         </div>
                         <!-- end page title -->
 
                     </div> <!-- container -->
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box">
+                                    <h3 class="text-center header-title">Chào mừng bạn đến với trang quản lý</h3>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
 
                 </div> <!-- content -->
 

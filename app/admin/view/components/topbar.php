@@ -73,7 +73,7 @@
   <div class="logo-box">
       <a href="index.html" class="logo text-center">
           <span class="logo-lg">
-              <img src="<?php echo constant("DIR_APP"); ?>admin\view\assets\images\logo-light.png" alt="" height="20">
+              <img src="<?php echo constant("DIR_APP"); ?>admin\view\assets\images\logo-light.png" alt="" height="50">
               <!-- <span class="logo-lg-text-light">Xeria</span> -->
           </span>
           <span class="logo-sm">

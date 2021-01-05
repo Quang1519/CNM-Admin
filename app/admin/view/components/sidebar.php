@@ -7,25 +7,25 @@
 
             <ul class="metismenu" id="side-menu">
 
-                <li class="menu-title">Navigation</li>
+                <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="javascript: void(0);" class="waves-effect">
+                    <a href="index.html" class="waves-effect">
                         <i class="remixicon-dashboard-line"></i>
-                        <span class="badge badge-pink badge-pill float-right">2</span>
-                        <span> Dashboards </span>
+                        <!-- <span class="badge badge-pink badge-pill float-right">2</span> -->
+                        <span> Trang chủ </span>
                     </a>
-                    <ul class="nav-second-level" aria-expanded="false">
+                    <!-- <ul class="nav-second-level" aria-expanded="false">
                         <li>
                             <a href="index.html">Dashboard 1</a>
                         </li>
                         <li>
                             <a href="dashboard-2.html">Dashboard 2</a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
 
-                <li>
+                <!-- <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <i class="remixicon-stack-line"></i>
                         <span> Apps </span>
@@ -51,7 +51,7 @@
                             <a href="apps-team.html">Team Members</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
                 <li>
                     <a href="addUsers.html" class="waves-effect">
