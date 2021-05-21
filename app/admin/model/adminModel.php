@@ -77,9 +77,11 @@ class adminModel extends Model {
     return $this->loaddulieu($url);
   }
 
-  public function Event($data, $action, $message){
+  public function Event($data, $hoatdong, $action, $message){
     // $message = "Cập nhật sự kiện";
     $url = $this->makeUrl("sukien/".$action."/", $data);
+    $url .=  "?hoatdong=".urlencode($hoatdong);
+    
     $result = $this->themxoasua($url);
     if($result){
       return [1, $message];
@@ -89,7 +91,7 @@ class adminModel extends Model {
     }
   }
 
-  public function checkEvent($data, $action, $message){
+  public function checkEvent($data, $hoatdong, $action, $message){
     $result = $this->getEvent();
     $count = 0;
     $mask = '';
@@ -108,7 +110,7 @@ class adminModel extends Model {
       return [0, $message];
     }
     else{
-      return $this->Event($data, $action, $message);
+      return $this->Event($data, $hoatdong, $action, $message);
     }
   }
 

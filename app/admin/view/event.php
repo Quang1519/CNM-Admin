@@ -5,6 +5,8 @@
        <link href="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\footable\footable.core.min.css" rel="stylesheet" type="text/css">
        <link href="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\bootstrap-datepicker\bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
        <link href="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\clockpicker\bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css">
+      
+       <link href="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\bootstrap-tagsinput\bootstrap-tagsinput.css" rel="stylesheet" type="text/css">
 
     </head>
 
@@ -135,6 +137,21 @@
                                               </div>
                                           </div>
                                       </div>
+
+                                    
+
+                                      <div class="form-row">
+                                          <div class="col-md-12">
+                                              <div class="form-group ">
+                                                  <label for="hoatdong" class="control-label">Hoạt động</label>
+                                                  <input class="form-control" id="hoatdong" name="hoatdong" placeholder="Thêm hoạt động" required data-role="tagsinput">
+                                                  <div class="invalid-feedback">
+                                                    Vui lòng điền hoạt động
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+
                                       <div class="form-row">
                                           <div class="col-md-12">
                                             <div class="form-group">
@@ -281,7 +298,7 @@
 
         <script src="<?php echo constant("DIR_APP") ?>admin\view\assets\js\pages\foo-tables.init.js"></script>
 
-
+        <script src="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\bootstrap-tagsinput\bootstrap-tagsinput.min.js"></script>
         <script src="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\bootstrap-datepicker\bootstrap-datepicker.min.js"></script>
 
         <script src="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\clockpicker\bootstrap-clockpicker.min.js"></script>
@@ -296,6 +313,7 @@
             $(".btn-icon").on("click", function () {
                 // console.log(this);
                 var myValue = $(this).data('val');
+                // console.log(myValue.hoatdong.toString());
                 // $(".modal-body #bookId").val( myBookId );
 
                 var obj = $("#update-modal");
@@ -320,6 +338,8 @@
                 $(obj).find(".modal-footer #create").prop('value', '');
                 // console.log(start);
                 $(obj).find(".modal-body #masukien").prop( "readonly", true );
+                // $(obj).find(".modal-body #hoatdong").val(myValue.hoatdong.tagsinput('items'));
+                $(obj).find(".modal-body #hoatdong").tagsinput('add', myValue.hoatdong.toString());
                 $(obj).find(".modal-body #masukien").val(myValue.masukien);
                 $(obj).find(".modal-body #ngay").val(myValue.ngay);
                 $(obj).find(".modal-body #timeStart").val(time[0]);
@@ -352,6 +372,8 @@
             });
 
         </script>
+
+        
 
         <?php THONGBAO::message($this->message)?>
 
