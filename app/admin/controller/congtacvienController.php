@@ -1,13 +1,13 @@
 <?php
-  class eventController extends Controller {
+  class congtacvienController extends Controller {
     public function index(){
 
       $this->view->message = [-1];
       if(isset($_REQUEST['create'])){
 
-        // die(print_r($_REQUEST));
+        die(print_r($_REQUEST));
 
-        $data['chongoi'] = $_REQUEST['chongoi'];
+        $data['email'] = $_REQUEST['chongoi'];
         $data['diadiem'] = $_REQUEST['diachi'];
         $data['khachmoi'] = $_REQUEST['khachmoi'];
         $data['thoigian'] = $_REQUEST['batdau']."-".$_REQUEST['ketthuc'];
@@ -36,7 +36,7 @@
       }
 
       $this->view->data = $this->model->getCongTacVien();
-      $this->view->render('event', 'eventTable');
+      $this->view->render('congtacvien', 'congtacvienTable');
     }
 
   }

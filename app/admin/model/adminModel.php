@@ -119,6 +119,11 @@ class adminModel extends Model {
     return $this->loaddulieu($url);
   }
 
+  public function getCongTacVien(){
+    $url = $this->makeUrl("/congtacvien");
+    return $this->loaddulieu($url);
+  }
+
 }
 
 
