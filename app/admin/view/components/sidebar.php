@@ -55,7 +55,8 @@
 
                 <li>
                     <a href="addUsers.html" class="waves-effect">
-                    <i class="remixicon-add-circle-line "></i>
+                    <!-- <i class="remixicon-add-circle-line "></i> -->
+                    <i class=" remixicon-account-box-line "></i>
                     <span>Quản lý tài khoản</span>
                     </a>
                 </li>
@@ -73,7 +74,7 @@
 
                  <li>
                     <a href="congtacvien.html" class="waves-effect">
-                    <i class="remixicon-calendar-event-fill "></i>
+                    <i class="remixicon-account-circle-line "></i>
 
 
                     <span>Quản lý cộng tác viên</span>

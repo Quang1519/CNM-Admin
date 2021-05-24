@@ -144,7 +144,7 @@
                                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                                     </button> -->
                                   </div>
-                                  <form class="needs-validation" novalidate method="POST">
+                                  <form id="modal-form" class="needs-validation" novalidate method="POST">
                                   <div class="modal-body p-4">
                                       <div class="form-row">
                                           <div class="col-md-12">
@@ -256,7 +256,7 @@
             }
 
             function checkPassword(){
-                 if($("#password").val() == $("#reTypePassword").val() && $("#password").val() != '' && $("#phanquyen").val() != 0 && $("#email").val() != '' && $("#password").val().length >= 6) {
+                 if($("#password").val() == $("#reTypePassword").val() && $("#password").val() != '' && $("#email").val() != '' && $("#password").val().length >= 6) {
                     enableButton();
                 } else {
                     disabledButton();
@@ -282,16 +282,16 @@
             })
 
 
-            $("#phanquyen").on("change", function () {
-                    // console.log($("#phanquyen").val());
-                if($("#phanquyen").val() == 0) {
-                    // console.log($("#phanquyen").val());
-                    checkPassword();
-                } else {
-                   checkPassword();
-                    // console.log($("#phanquyen").val());
-                }
-            });
+            // $("#phanquyen").on("change", function () {
+            //         // console.log($("#phanquyen").val());
+            //     if($("#phanquyen").val() == 0) {
+            //         // console.log($("#phanquyen").val());
+            //         checkPassword();
+            //     } else {
+            //        checkPassword();
+            //         // console.log($("#phanquyen").val());
+            //     }
+            // });
 
             $("#password").keyup(function() {
                checkPassword();
@@ -306,6 +306,7 @@
                 // console.log('asdfasdfd');
                 // var data = $(this).data('del');
                 // console.log($(this).data('del'));
+                console.log($(this).data('del').uid);
                 $.ajax({
                 type : 'POST', //kiểu post
                 url  : 'congtacvien/delCongTacVien.html', //gửi dữ liệu sang trang submit.php
@@ -318,7 +319,24 @@
                             // } else {
                             //     $('#content').html(data);
                             // }
-                            alert(data);
+                            // alert(data);
+                            if(data) {
+
+
+                            Notiflix.Report.Success( 'Xóa thành công', '', 'Xác nhận', function(){
+                              // document.write('<head><meta http-equiv="refresh"></head>')
+                              // window.location.reload();
+                              // top.location.href=top.location.href
+                              window.location.href = 'congtacvien.html';
+                               
+                            } );
+                            } else {
+                              Notiflix.Report.Failure( 'Xóa thất bại', '', 'Xác nhận', function(){
+                              // window.location.reload();
+                              window.location.href = 'congtacvien.html';
+                            } );
+                            }
+                            // console.log(data);
                        }
                 });
                 return false;

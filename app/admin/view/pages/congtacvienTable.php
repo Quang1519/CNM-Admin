@@ -23,7 +23,10 @@
           return 'Xác nhận vé';
           break;
         case 3:
-          return 'Giao dịch vé';
+          return 'Xác nhận chuyển vé';
+          break;
+        case 10:
+          return 'Quyền admin';
           break;
         default:
           return 'Chưa được cấp quyền'; 
@@ -52,7 +55,10 @@
         // unset($result['uid']);
         // echo json_encode($result);
         // die();
-        $dataDel = ['uid' => $result['uid'], 'email' => $result['email']];
+        $dataDel = ['uid' => $result['uid']];
+        if($result['phanquyen'] == 10) {
+          continue;
+        }
         echo '<td class="text-center">'.$count++.'</td>
         <td>'.$result['email'].'</td>
         <td>'.$this->roleUser($result['phanquyen']).'</td>';

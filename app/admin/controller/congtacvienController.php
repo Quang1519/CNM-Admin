@@ -37,9 +37,10 @@
 
     public function delCongTacVien(){
       // echo 'del cong tac vien';
-      if(isset($_REQUEST['email']) && isset($_REQUEST['uid'])) {
+      // print_r($_REQUEST);
+      if(isset($_REQUEST['uid'])) {
         $data['uid'] = $_REQUEST['uid'];
-        $data['email'] = $_REQUEST['email'];
+        // $data['email'] = $_REQUEST['email'];
         
         $this->view->message = $this->model->delCongTacVien($data, "delete", "Xóa tài khoản");
         // $this->index();
