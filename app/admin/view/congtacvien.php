@@ -348,7 +348,7 @@
                 // var start = hi.trim().slice(-2,2);
                 $(obj).find(".modal-header .modal-title").text("Cập nhật tài khoản");
                 $(obj).find(".modal-footer #create").text("Cập nhật");
-                $(obj).find(".modal-footer #create").prop('value', '');
+                $(obj).find(".modal-footer #create").prop('value', myValue.uid);
                 // console.log(start);
                 // $(obj).find(".modal-body #mssv").prop( "readonly", true );
                 $("#email").val(myValue.email);

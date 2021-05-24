@@ -19,6 +19,7 @@
           }
           else {
             $message = "Cập nhật tài khoản";
+            $data['uid'] = $_REQUEST['create'];
             $this->view->message = $this->model->congTacVien($data, "update", $message);
           }
         } else {
