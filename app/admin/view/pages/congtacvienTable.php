@@ -34,9 +34,9 @@
 
     public function createSelect()
     {
-      $quyen = [0 => 'Chọn',1 => 'Xác nhận hoạt đọng', 2 => 'Xác nhận vé', 3 => 'Xác nhận chuyển vé'];
-      $select = '  <label for="phanquyen" class="">Phân quyền</label>
-                                                <select id="phanquyen" class="form-control">';
+      $quyen = [0 => 'Chọn',1 => 'Xác nhận hoạt động', 2 => 'Xác nhận vé', 3 => 'Xác nhận chuyển vé'];
+      $select = '  <label for="phanquyen" class="col-form-label">Phân quyền</label>
+                      <select id="phanquyen" name="phanquyen" class="form-control">';
       foreach ($quyen as $key => $value) {
         $select .= '<option value="' . $key . '">' . $value . '</option>';
       }
@@ -52,6 +52,7 @@
         // unset($result['uid']);
         // echo json_encode($result);
         // die();
+        $dataDel = ['uid' => $result['uid'], 'email' => $result['email']];
         echo '<td class="text-center">'.$count++.'</td>
         <td>'.$result['email'].'</td>
         <td>'.$this->roleUser($result['phanquyen']).'</td>';
@@ -59,9 +60,13 @@
         
         echo '<td class="text-center">
           <div class="">
-            <button type="button" class="btn btn-sm btn-primary btn-xs btn-icon"  data-toggle="modal" data-target="#update-modal" data-val=\''.json_encode($result,JSON_UNESCAPED_UNICODE).'\'><i class=" remixicon-edit-line "></i></button>
+            <button type="button" class="btn btn-sm btn-primary btn-xs btn-icon btn-create"  data-toggle="modal" data-target="#update-modal" data-val=\''.json_encode($result,JSON_UNESCAPED_UNICODE).'\'><i class=" remixicon-edit-line "></i></button>
+          
+        
+          <button type="button" data-del=\''.json_encode($dataDel,JSON_UNESCAPED_UNICODE).'\' class="btn btn-danger btn-xs btn-icon btn-del"><i class="remixicon-delete-bin-line"></i></button>
           </div>
-        </td></tr>';
+        </td>
+        </tr>';
       }
     }
   }

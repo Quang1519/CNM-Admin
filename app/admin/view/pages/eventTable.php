@@ -2,6 +2,8 @@
   class eventTable{
     public function createEventTable(){
       $data = $this->data;
+      // print_r($data);
+      // die();
       if($data){
         $this->createTable($data);
       }

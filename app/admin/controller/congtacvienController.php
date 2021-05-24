@@ -5,41 +5,49 @@
       $this->view->message = [-1];
       if(isset($_REQUEST['create'])){
 
-        die(print_r($_REQUEST));
+        // die(print_r($_REQUEST));
 
-        $data['email'] = $_REQUEST['chongoi'];
-        $data['diadiem'] = $_REQUEST['diachi'];
-        $data['khachmoi'] = $_REQUEST['khachmoi'];
-        $data['thoigian'] = $_REQUEST['batdau']."-".$_REQUEST['ketthuc'];
-        // $data['trangthai'] = 0;
-        if(isset($_REQUEST['customRadio'])){
-          $data['trangthai'] = $_REQUEST['customRadio'];
-        }
-        else {
-          $data['trangthai'] = 1;
-        }
-        $data['masukien'] = $_REQUEST['masukien'];
-        $data['ngay'] =  str_replace("/", "-", $_REQUEST['ngay']);
-        // $data['trangthai'] = $_REQUEST['customRadio'];
-        $hoatdong = $_REQUEST['hoatdong'];
-        // die($hoatdong);
 
-        if($_REQUEST['create'] == "New") {
-          $data['trangthai'] = 1;
-          $message = "Thêm sự kiện mới";
-          $this->view->message = $this->model->checkEvent($data, $hoatdong, "create", $message);
+        $data['email'] = $_REQUEST['email'];
+        $data['password'] = $_REQUEST['password'];
+        $data['phanquyen'] = $_REQUEST['phanquyen'];
+        
+        if($_REQUEST['password'] == $_REQUEST['reTypePassword']) {
+          if($_REQUEST['create'] == "New") {
+          $message = "Thêm tài khoản mới";
+          $this->view->message = $this->model->congTacVien($data, "create", $message);
+          }
+          else {
+            $message = "Cập nhật tài khoản";
+            $this->view->message = $this->model->congTacVien($data, "update", $message);
+          }
+        } else {
+          $this->view->message = [0,"Mật khẩu không khớp thao tác"];
         }
-        else {
-          $message = "Cập nhật sự kiện";
-          $this->view->message = $this->model->checkEvent($data, $hoatdong, "update", $message);
-        }
+
+       
       }
+
 
       $this->view->data = $this->model->getCongTacVien();
       $this->view->render('congtacvien', 'congtacvienTable');
     }
 
-  }
 
+    public function delCongTacVien(){
+      // echo 'del cong tac vien';
+      if(isset($_REQUEST['email']) && isset($_REQUEST['uid'])) {
+        $data['uid'] = $_REQUEST['uid'];
+        $data['email'] = $_REQUEST['email'];
+        
+        $this->view->message = $this->model->delCongTacVien($data, "delete", "Xóa tài khoản");
+        // $this->index();
+      }
+      // print_r($_REQUEST);
+      // die();
+      // print json_encode($_REQUEST);
+    }
+
+  }
 
 ?>

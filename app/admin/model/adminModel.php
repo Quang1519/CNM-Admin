@@ -30,6 +30,7 @@ class adminModel extends Model {
         $url .= $value."/";
       }
       $url = substr($url, 0, -1);
+      // echo $this->link.$link.$url;
       return $this->link.$link.rawurlencode($url);
     }
     else {
@@ -122,6 +123,32 @@ class adminModel extends Model {
   public function getCongTacVien(){
     $url = $this->makeUrl("/congtacvien");
     return $this->loaddulieu($url);
+  }
+
+  public function congTacVien($data, $action, $message){
+    $url = $this->makeUrl("congtacvien/".$action."/", $data);
+    // print_r($data);
+    // echo $url;
+    // die();
+    $result = $this->themxoasua($url);
+    if($result) {
+      return [1, $message];
+    } else {
+      return [0, $message];
+    }
+  }
+
+
+  public function delCongTacVien($data, $message) {
+    $url = $this->makeUrl("congtacvien/delete/",$data);
+    // echo $url;
+    // die();
+    $result = $this->themxoasua($url);
+    if($result) {
+      return [0, $message];
+    } else {
+      return [1, $message];
+    }
   }
 
 }

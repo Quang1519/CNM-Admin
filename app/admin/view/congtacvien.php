@@ -112,7 +112,8 @@
                                             <!-- <th data-sort-ignore="true" class="text-dark">Khoa</th> -->
                                             <!-- <th data-sort-ignore="true" class="text-dark">Ngành</th> -->
                                             <!-- <th data-sort-ignore="true" class="text-dark">Trạng thái</th> -->
-                                            <th data-sort-ignore="true" class="text-dark">Cập nhật</th>
+                                            <th data-sort-ignore="true" class="text-dark">Cập nhật / Xóa</th>
+                                            <!-- <th data-sort-ignore="true" class="text-dark"></th> -->
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -180,7 +181,7 @@
                                           <div class="col-md-12">
                                               <div class="form-group">
                                                   <label for="password" class="control-label">Mật khẩu</label>
-                                                  <input type="password" class="form-control" id="password" placeholder="Mật khẩu" name="email" required>
+                                                  <input type="password" class="form-control" id="password" placeholder="Mật khẩu" name="password" required>
                                                   <div class="invalid-feedback">
                                                     Nhập mật khẩu
                                                   </div>
@@ -246,10 +247,88 @@
         <!-- <script src="<?php echo constant("DIR_APP") ?>admin\view\assets\js\pages\form-advanced.init.js"></script> -->
 
         <script>
+            function disabledButton() {
+                $("#update-modal").find(".modal-footer #create").prop( "disabled", true );
+            }
+
+            function enableButton() {
+                $("#update-modal").find(".modal-footer #create").prop( "disabled", false );
+            }
+
+            function checkPassword(){
+                 if($("#password").val() == $("#reTypePassword").val() && $("#password").val() != '' && $("#phanquyen").val() != 0 && $("#email").val() != '' && $("#password").val().length >= 6) {
+                    enableButton();
+                } else {
+                    disabledButton();
+                }
+            }
+
+            function checkMail() {
+                var re = /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
+                return re.test($("#email").val().toLowerCase());
+            }
+
+            $("#email").change(function() {
+                checkPassword();
+            })
+
+
+            $("#email").keyup(function() {
+                if(checkMail()) {
+                    checkPassword();
+                } else {
+                    disabledButton();
+                }
+            })
+
+
+            $("#phanquyen").on("change", function () {
+                    // console.log($("#phanquyen").val());
+                if($("#phanquyen").val() == 0) {
+                    // console.log($("#phanquyen").val());
+                    checkPassword();
+                } else {
+                   checkPassword();
+                    // console.log($("#phanquyen").val());
+                }
+            });
+
+            $("#password").keyup(function() {
+               checkPassword();
+            });
+
+            $("#reTypePassword").keyup(function() {
+               checkPassword();
+            });
+
+
+            $(".btn-del").click(function() {
+                // console.log('asdfasdfd');
+                // var data = $(this).data('del');
+                // console.log($(this).data('del'));
+                $.ajax({
+                type : 'POST', //kiểu post
+                url  : 'congtacvien/delCongTacVien.html', //gửi dữ liệu sang trang submit.php
+                data : $(this).data('del'),
+                success :  function(data)
+                       {
+                            // if (data == 'false')
+                            // {
+                            //     alert('Sai tên đăng nhập hoặc mật khẩu');
+                            // } else {
+                            //     $('#content').html(data);
+                            // }
+                            alert(data);
+                       }
+                });
+                return false;
+            })
+          
+
 
             // var dienra = $("#con-close-modal .modal-body #remove");
 
-            $(".btn-icon").on("click", function () {
+            $(".btn-create").on("click", function () {
                 // console.log(this);
                 var myValue = $(this).data('val');
                 // $(".modal-body #bookId").val( myBookId );
@@ -260,6 +339,7 @@
 
 
                 // $(obj).find(".modal-body #add").append(dienra);
+                $(obj).find(".modal-footer #create").prop( "disabled", true );
 
                 
                 // console.log(dienra);
@@ -271,10 +351,11 @@
                 $(obj).find(".modal-footer #create").prop('value', '');
                 // console.log(start);
                 // $(obj).find(".modal-body #mssv").prop( "readonly", true );
-                $(obj).find(".modal-body #email").val(myValue.email);
-                $(obj).find(".modal-body #phanquyen").val(myValue.phanquyen);
-                // $(obj).find(".modal-body #ten").val(myValue.ten);
-                // $(obj).find(".modal-body #ngay").val(myValue.ngaysinh);
+                $("#email").val(myValue.email);
+                $("#phanquyen").val(myValue.phanquyen);
+                $("#password").val('');
+                $("#reTypePassword").val('');
+                // checkPassword();
                 // $(obj).find(".modal-body #lop").val(myValue.lop);
                 // $(obj).find(".modal-body #khoa").val(myValue.khoa);
                 // $(obj).find(".modal-body #nganh").val(myValue.nganh);
@@ -282,26 +363,29 @@
             });
 
 
+            
             $("#addUser").on("click", function () {
                 // console.log(this);
                 // var myValue = $(this).data('val');
                 // $(".modal-body #bookId").val( myBookId );
                 var obj = $("#update-modal");
                 // $(obj).find(".modal-body #remove").remove();
+                $(obj).find(".modal-footer #create").prop( "disabled", true );
 
-                var select = $("#phanquyen");
-                if(select.val() == 0) {
-                    $(obj).find(".modal-footer #create").prop( "disable", true );
-                }
+                // $("#phanquyen").on("click", function () {
+                //     console.log($("#phanquyen").val());
+                // });
 
-                
-                
+
+
                 $(obj).find(".modal-header .modal-title").text("Thêm tài khoản");
                 $(obj).find(".modal-footer #create").text("Thêm mới");
                 $(obj).find(".modal-footer #create").prop('value', 'New');
                 // $(".hidden").attr("placeholder", "Type here to search");
                 $(obj).find(".modal-body #email").val('').attr("placeholder", "example@gmail.com");
                 $(obj).find(".modal-body #phanquyen").val(0);
+                $("#password").val('');
+                $("#reTypePassword").val('');
                 // $(obj).find(".modal-body #ten").val('').attr("placeholder", "Trúc");
 
             });

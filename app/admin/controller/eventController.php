@@ -35,7 +35,7 @@
         }
       }
 
-      $this->view->data = $this->model->getCongTacVien();
+      $this->view->data = $this->model->getEvent();
       $this->view->render('event', 'eventTable');
     }
 
