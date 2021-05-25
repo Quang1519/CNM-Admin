@@ -261,8 +261,8 @@
 
                                   </div>
                                   <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Đóng</button>
-                                      <button type="submit" id="create" name="create" class="btn btn-success waves-effect waves-light" value="">Cập nhật</button>
+                                      <button type="button" class="btn btn-secondary waves-effect btn-close" value="close" data-dismiss="modal">Đóng</button>
+                                      <button type="button" name="create" class="btn btn-success waves-effect waves-light btn-create" value="" data-dismiss="modal">Cập nhật</button>
                                   </div>
                                   </form>
                               </div>
@@ -334,12 +334,15 @@
                 // var hi = test[0];
                 // var start = hi.trim().slice(-2,2);
                 $(obj).find(".modal-header .modal-title").text("Cập nhật sự kiện " + myValue.masukien);
-                $(obj).find(".modal-footer #create").text("Cập nhật");
-                $(obj).find(".modal-footer #create").prop('value', '');
+                $(obj).find(".modal-footer .btn-create").text("Cập nhật");
+                $(obj).find(".modal-footer .btn-create").prop('value', '');
                 // console.log(start);
                 $(obj).find(".modal-body #masukien").prop( "readonly", true );
                 // $(obj).find(".modal-body #hoatdong").val(myValue.hoatdong.tagsinput('items'));
-                $(obj).find(".modal-body #hoatdong").tagsinput('add', myValue.hoatdong.toString());
+                if(myValue.hoatdong) {
+                  $(obj).find(".modal-body #hoatdong").tagsinput('add', myValue.hoatdong.toString());
+                }
+                
                 $(obj).find(".modal-body #masukien").val(myValue.masukien);
                 $(obj).find(".modal-body #ngay").val(myValue.ngay);
                 $(obj).find(".modal-body #timeStart").val(time[0]);
@@ -359,8 +362,8 @@
 
 
                 $(obj).find(".modal-header .modal-title").text("Thêm sự kiện mới");
-                $(obj).find(".modal-footer #create").text("Thêm mới");
-                $(obj).find(".modal-footer #create").prop('value', 'New');
+                $(obj).find(".modal-footer .btn-create").text("Thêm mới");
+                $(obj).find(".modal-footer .btn-create").prop('value', 'New');
                 // $(".hidden").attr("placeholder", "Type here to search");
                 $(obj).find(".modal-body #masukien").val('').attr("placeholder", "IUHXXXX").attr("readonly", false);
                 $(obj).find(".modal-body #ngay").val('').attr("placeholder", "12/12/2020");
@@ -370,6 +373,96 @@
                 $(obj).find(".modal-body #khachmoi").val('').attr("placeholder", "20");
                 $(obj).find(".modal-body #diachi").val('').attr("placeholder", "Nguyễn Văn Bảo, Gò Vấp, Hồ Chí Minh");
             });
+
+
+            $(".btn-close").click(function() {
+              $(".modal-body #hoatdong").tagsinput('removeAll');
+              // console.log($(this).val());
+            })
+
+            $(".btn-create").click(function() {
+               var data = {
+                  'masukien' : $("#masukien").val(),
+                  'hoatdong' : $("#hoatdong").val(),
+                  'ngay' : $("#ngay").val(),
+                  'batdau' : $("#timeStart").val(),
+                  'ketthuc' : $("#timeEnd").val(),
+                  'chongoi' : $("#chongoi").val(),
+                  'khachmoi' : $("#khachmoi").val(),
+                  'diachi' : $("#diachi").val(),
+                  // 'trangthai' : 1,
+                }
+              if($(this).val()) {
+                // console.log($(this).val());
+                // var data = {
+                //   'masukien' : $("#masukien").val(),
+                //   'hoatdong' : $("#hoatdong").val(),
+                //   'ngay' : $("#ngay").val(),
+                //   'timeStart' : $("#timeStart").val(),
+                //   'timeEnd' : $("#timeEnd").val(),
+                //   'chongoi' : $("#chongoi").val(),
+                //   'khachmoi' : $("#khachmoi").val(),
+                //   'diachi' : $("#diachi").val(),
+                //   'trangthai' : 1,
+                // }
+                data['trangthai'] = 1;
+                data['edit'] = 'New';
+                var message = 'Thêm sự kiện mới';
+                // console.log(data);
+                senRequest(data, message);
+              } else {
+                data['trangthai'] = $("input[name=customRadio]:checked").val();
+                data['edit'] = 'Update';
+                var message = 'Cập nhật sự kiện';
+                // $("input[name=nameGoesHere]").val();
+                // console.log(data);
+                senRequest(data, message);
+              }
+            })
+
+
+            function confirmSuccess( message) {
+              Notiflix.Loading.Remove();
+              Notiflix.Report.Success( message + ' thành công ', '', 'Xác nhận', function(){
+                window.location.href = 'event.html';
+              });
+            }
+
+
+             function confirmFailure( message) {
+              Notiflix.Loading.Remove();
+              Notiflix.Report.Failure( message + ' thất bại ', '', 'Xác nhận', function(){
+                window.location.href = 'event.html';
+              });
+            }
+
+
+            function senRequest(getData, message){
+              Notiflix.Loading.Circle('Vui lòng đợi...');
+              $.ajax({
+                type : 'POST',
+                url : 'event/edit.html',
+                data : getData,
+                success : function(response) {
+                  obj = JSON.parse(response);
+                  if(obj.data) {
+                    console.log(response);
+                    confirmSuccess(message);
+                  } else {
+                    // console.log(JSON.parse(response).data);
+                    // console.log(response.data);
+                    // console.log('asdfaadsf');
+                    confirmFailure(message);
+                  }
+                },
+                error : function(error) {
+                  // console.log(error);
+                  confirmFailure(message);
+                }
+
+              })
+              return false;
+            }
 
         </script>
 

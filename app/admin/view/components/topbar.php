@@ -1,3 +1,9 @@
+<div id="preloader">
+            <div id="status">
+                <div class="bouncingLoader"><div></div><div></div><div></div></div>
+            </div>
+        </div>
+
 <div class="navbar-custom">
   <ul class="list-unstyled topnav-menu float-right mb-0">
 

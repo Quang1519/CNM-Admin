@@ -323,7 +323,7 @@
                             if(data) {
 
 
-                            Notiflix.Report.Success( 'Xóa thành công', '', 'Xác nhận', function(){
+                            Notiflix.Report.Success( 'Xóa tài khoản thành công', '', 'Xác nhận', function(){
                               // document.write('<head><meta http-equiv="refresh"></head>')
                               // window.location.reload();
                               // top.location.href=top.location.href
@@ -331,7 +331,7 @@
                                
                             } );
                             } else {
-                              Notiflix.Report.Failure( 'Xóa thất bại', '', 'Xác nhận', function(){
+                              Notiflix.Report.Failure( 'Xóa tài khoản thất bại', '', 'Xác nhận', function(){
                               // window.location.reload();
                               window.location.href = 'congtacvien.html';
                             } );

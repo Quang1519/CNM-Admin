@@ -82,13 +82,18 @@ class adminModel extends Model {
     // $message = "Cập nhật sự kiện";
     $url = $this->makeUrl("sukien/".$action."/", $data);
     $url .=  "?hoatdong=".urlencode($hoatdong);
+
+    // echo $url;
+    // echo json_encode(["data" => true],JSON_UNESCAPED_UNICODE);
     
     $result = $this->themxoasua($url);
     if($result){
-      return [1, $message];
+      // return [1, $message];
+      echo json_encode(["data" => true],JSON_UNESCAPED_UNICODE);
     }
     else {
-      return [0, $message];
+      // return [0, $message];
+      echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
     }
   }
 
@@ -108,7 +113,9 @@ class adminModel extends Model {
     }
     // die();
     if($count>0 && $mask != $data['masukien'] && $data['trangthai'] == 1){
-      return [0, $message];
+      // return [0, $message];
+      // print_r($data);
+      echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
     }
     else{
       return $this->Event($data, $hoatdong, $action, $message);
