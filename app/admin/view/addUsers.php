@@ -116,7 +116,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php $this->page->createTable(); ?>
+                                        <?php $this->page->createUsersTable(); ?>
 
                                         </tbody>
                                         <tfoot>

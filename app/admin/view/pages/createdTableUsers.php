@@ -1,5 +1,19 @@
 <?php
  class createdTableUsers {
+  public function createUsersTable(){
+      $data = $this->data;
+      // print_r($data);
+      // die();
+      if($data){
+        $this->createTable($data);
+      }
+      else {
+        echo 'Không tải được dữ liệu vui lòng quay lại sau';
+      }
+  }
+
+
+
   public function createTable(){
     $data = $this->data;
     $count = 1;

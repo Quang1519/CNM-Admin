@@ -124,7 +124,7 @@
                                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                                     </button> -->
                                   </div>
-                                  <form class="needs-validation" novalidate method="POST">
+                                  <form class="needs-validation" novalidate method="POST" id="form-check">
                                   <div class="modal-body p-4">
                                       <div class="form-row">
                                           <div class="col-md-12">
@@ -144,7 +144,7 @@
                                           <div class="col-md-12">
                                               <div class="form-group ">
                                                   <label for="hoatdong" class="control-label">Hoạt động</label>
-                                                  <input class="form-control" id="hoatdong" name="hoatdong" placeholder="Thêm hoạt động" required data-role="tagsinput">
+                                                  <input type="text" class="form-control" id="hoatdong" name="hoatdong" placeholder="Thêm hoạt động" required data-role="tagsinput">
                                                   <div class="invalid-feedback">
                                                     Vui lòng điền hoạt động
                                                   </div>
@@ -193,6 +193,7 @@
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
                                                 </div>
+                                                <div class="end-time"></div>
                                                 <div class="invalid-feedback">
                                                     Vui lòng chọn thời gian kết thúc
                                                 </div>
@@ -225,7 +226,7 @@
                                           <div class="col-md-12">
                                               <div class="form-group ">
                                                   <label for="diachi" class="control-label">Địa chỉ</label>
-                                                  <input class="form-control" id="diachi" name="diachi" placeholder="Địa chỉ" required>
+                                                  <input type="text" class="form-control" id="diachi" name="diachi" placeholder="Địa chỉ" required>
                                                   <div class="invalid-feedback">
                                                     Vui lòng điền địa chỉ
                                                   </div>
@@ -262,7 +263,8 @@
                                   </div>
                                   <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary waves-effect btn-close" value="close" data-dismiss="modal">Đóng</button>
-                                      <button type="button" name="create" class="btn btn-success waves-effect waves-light btn-create" value="" data-dismiss="modal">Cập nhật</button>
+                                      <button type="submit" name="create" class="btn btn-success waves-effect waves-light btn-create" value="">Cập nhật</button>
+                                      <!-- <button type="submit" name="create" class="btn btn-success waves-effect waves-light btn-create" data-dismiss="modal" value="">Cập nhật</button> -->
                                   </div>
                                   </form>
                               </div>
@@ -307,6 +309,113 @@
         <script src="<?php echo constant("DIR_APP") ?>admin\view\assets\libs\switchery\switchery.min.js"></script>
 
         <script>
+
+
+
+           $("#form-check").submit(function(e) {
+                e.preventDefault();
+                // $("input[type=submit]",this).attr("data-dismiss","modal");
+                // $("#form-check").filter(':input').each(function () {
+                //      //..your code
+                //      console.log('ádsad');
+                // });
+                var count = 0;
+                let data = {};
+                $("#form-check input[type=text]").each(function() {
+                  
+                  if($(this).val()) {
+                    // console.log($(this).val());
+                    // console.log($(this).attr('name'));
+                    count++;
+                    // console.log(count);
+                    data[$(this).attr('name')] = $(this).val();
+
+                  }
+
+
+                  
+                    //... your code
+                });
+
+                // if(checkTime(data['batdau'].split(":"), data['ketthuc']).split(":")) {
+                //   $("#form-check #update-modal .end-time").text("Thời gian kết thúc phải muộn hơn thời gian bắt đầu");
+                // }
+
+                // if(data['batdau'])end-time
+                
+                // var batdau = data['batdau'].split(":");
+                // var ketthuc = data['ketthuc'].split(":");
+                // if(checkTime(batdau, ketthuc)) {
+                //   $(".end-time").removeClass("invalid-feedback");
+                // } else {
+                //   // $("#form-check").removeClass('was-validated');
+                //   $(".end-time").addClass("invalid-feedback");
+                //   $(".end-time").text("Thời gian kết thúc phải muộn hơn thời gian bắt đầu");
+                //   // console.log($(".end-time"));
+                // }
+
+
+                if(count == 8) {
+                    // $("btn-create").prop("disabled",false);
+                    // console.log("dddd");
+                    sendData(data);
+                    // console.log(data);
+                } 
+
+
+                // $("#form-check").each(function(){
+                //     var element = $(this).find(':input');
+                //     console.log(element); 
+                //     element.each(function (){
+                //       console.log($(this).val());
+                //     })
+                    
+                // });
+            });
+
+           $(".btn-close").click(function() {
+            $("#form-check").removeClass('was-validated');
+           })
+
+           function checkTime(batdau, ketthuc) {
+              
+              if(parseInt(batdau[0]) < parseInt(ketthuc[0])) {
+                return true;
+              } else if(parseInt(batdau[0]) == parseInt(ketthuc[0])){
+                if(parseInt(batdau[1]) < parseInt(ketthuc[1])) {
+                  return true;
+                } else {
+                  return false;
+                }
+              } else {
+                return false
+              }
+           }
+
+          function sendData(data) {
+             // $('.btn-create').attr("data-dismiss","modal");
+             // $("#update-modal").modal('hide');
+             // $("#update-modal").hide();
+            $("#update-modal .btn-close").click();
+            $("#form-check").removeClass('was-validated');
+            // console.log(data);
+            // console.log($(".btn-create").val());
+            if($(".btn-create").val()) {
+              data['trangthai'] = 1;
+              data['edit'] = 'New';
+              var message = 'Thêm sự kiện mới';
+              // console.log(data);
+              senRequest(data, message);
+            } else {
+              data['trangthai'] = $("input[name=customRadio]:checked").val();
+              data['edit'] = 'Update';
+              var message = 'Cập nhật sự kiện';
+              console.log(data);
+              // console.log("cap nhat su kien");
+              senRequest(data, message);
+            }
+
+          }
 
             var dienra = $("#update-modal .modal-body #remove");
 
@@ -380,83 +489,77 @@
               // console.log($(this).val());
             })
 
-            $(".btn-create").click(function() {
-               var data = {
-                  'masukien' : $("#masukien").val(),
-                  'hoatdong' : $("#hoatdong").val(),
-                  'ngay' : $("#ngay").val(),
-                  'batdau' : $("#timeStart").val(),
-                  'ketthuc' : $("#timeEnd").val(),
-                  'chongoi' : $("#chongoi").val(),
-                  'khachmoi' : $("#khachmoi").val(),
-                  'diachi' : $("#diachi").val(),
-                  // 'trangthai' : 1,
-                }
-              if($(this).val()) {
-                // console.log($(this).val());
-                // var data = {
-                //   'masukien' : $("#masukien").val(),
-                //   'hoatdong' : $("#hoatdong").val(),
-                //   'ngay' : $("#ngay").val(),
-                //   'timeStart' : $("#timeStart").val(),
-                //   'timeEnd' : $("#timeEnd").val(),
-                //   'chongoi' : $("#chongoi").val(),
-                //   'khachmoi' : $("#khachmoi").val(),
-                //   'diachi' : $("#diachi").val(),
-                //   'trangthai' : 1,
-                // }
-                data['trangthai'] = 1;
-                data['edit'] = 'New';
-                var message = 'Thêm sự kiện mới';
-                // console.log(data);
-                senRequest(data, message);
-              } else {
-                data['trangthai'] = $("input[name=customRadio]:checked").val();
-                data['edit'] = 'Update';
-                var message = 'Cập nhật sự kiện';
-                // $("input[name=nameGoesHere]").val();
-                // console.log(data);
-                senRequest(data, message);
-              }
-            })
+            Notiflix.Loading.Init({ svgColor:"#a9adab", }); 
+
+            // $(".btn-create").click(function() {
+            //   Notiflix.Loading.Hourglass('Vui lòng đợi...');
+            // })
+
+               // var data = {
+               //    'masukien' : $("#masukien").val(),
+               //    'hoatdong' : $("#hoatdong").val(),
+               //    'ngay' : $("#ngay").val(),
+               //    'batdau' : $("#timeStart").val(),
+               //    'ketthuc' : $("#timeEnd").val(),
+               //    'chongoi' : $("#chongoi").val(),
+               //    'khachmoi' : $("#khachmoi").val(),
+               //    'diachi' : $("#diachi").val(),
+               //    // 'trangthai' : 1,
+               //  }
+
+          
+
+
+
+             // Notiflix Notify - All Options 
+             // Notiflix.Notify.Init({ position:'right-bottom'})
+
+            // Notiflix.Report.Init({ 
+             
+            //   success: 
+            //     { 
+            //     buttonBackground:"#f8f8f8" ,}, 
+            //   }); 
+            
 
 
             function confirmSuccess( message) {
-              Notiflix.Loading.Remove();
-              Notiflix.Report.Success( message + ' thành công ', '', 'Xác nhận', function(){
-                window.location.href = 'event.html';
-              });
+              // Notiflix.Loading.Remove();
+              
+              Notiflix.Report.Success( message + ' thành công ','','Xác nhận');
+              window.location.href = 'event.html';
+              // Notiflix.Notify.Success(message + ' thành công');
             }
 
 
              function confirmFailure( message) {
               Notiflix.Loading.Remove();
               Notiflix.Report.Failure( message + ' thất bại ', '', 'Xác nhận', function(){
-                window.location.href = 'event.html';
+                // window.location.href = 'event.html';
               });
             }
 
 
             function senRequest(getData, message){
-              Notiflix.Loading.Circle('Vui lòng đợi...');
+              Notiflix.Loading.Hourglass('Vui lòng đợi...');
+              // Notiflix.Block.Hourglass('table#demo-foo-addrow', 'Vui lòng đợi...');
               $.ajax({
                 type : 'POST',
                 url : 'event/edit.html',
                 data : getData,
                 success : function(response) {
                   obj = JSON.parse(response);
+                  // obj = response;
+                  // console.log(response);
                   if(obj.data) {
-                    console.log(response);
+                    // console.log(obj.data);
+                    // Notiflix.Loading.Remove();
                     confirmSuccess(message);
                   } else {
-                    // console.log(JSON.parse(response).data);
-                    // console.log(response.data);
-                    // console.log('asdfaadsf');
                     confirmFailure(message);
                   }
                 },
                 error : function(error) {
-                  // console.log(error);
                   confirmFailure(message);
                 }
 

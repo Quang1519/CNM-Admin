@@ -1,8 +1,25 @@
 <?php
   class eventController extends Controller {
-    public function index(){
+    // protected $data;
 
+    // public function __construct($request) {
+    //   parent::__construct($request);
+    //   // var_dump($this);
+    //   $this->view->message = [-1];
+    //   if($this->data) {
+    //     print_r($data);
+    //     die();
+    //     $this->view->data = $this->data;
+    //   } else {
+    //     $this->view->data = $this->data = $this->model->getEvent();
+    //   }
+      
+    //   $this->view->render('event', 'eventTable');
+    // }
+
+    public function index(){
       $this->view->message = [-1];
+      
       if(isset($_REQUEST['create'])){
 
         // die(print_r($_REQUEST));
@@ -24,26 +41,30 @@
         $hoatdong = $_REQUEST['hoatdong'];
         // die($hoatdong);
 
-        if($_REQUEST['create'] == "New") {
-          $data['trangthai'] = 1;
-          $message = "Thêm sự kiện mới";
-          $this->view->message = $this->model->checkEvent($data, $hoatdong, "create", $message);
-        }
-        else {
-          $message = "Cập nhật sự kiện";
-          $this->view->message = $this->model->checkEvent($data, $hoatdong, "update", $message);
-        }
+        // if($_REQUEST['create'] == "New") {
+        //   $data['trangthai'] = 1;
+        //   $message = "Thêm sự kiện mới";
+        //   $this->view->message = $this->model->checkEvent($data, $hoatdong, "create", $message);
+        // }
+        // else {
+        //   $message = "Cập nhật sự kiện";
+        //   $this->view->message = $this->model->checkEvent($data, $hoatdong, "update", $message);
+        // }
       }
-
-      $this->view->data = $this->model->getEvent();
+      // if($this->data) {
+      //   $this->view->data = $this->data;
+      // } else {
+      //   $this->view->data = $this->data = $this->model->getEvent();
+      // }
+      $this->view->data = $this->data = $this->model->getEvent();
       $this->view->render('event', 'eventTable');
 
     }
 
 
     public function edit(){
-
-      if(isset($_REQUEST['edit'])){
+      // die(print_r($_REQUEST));
+      if(isset($_REQUEST['edit']) || isset($_REQUEST['create'])){
 
         // die(print_r($_REQUEST));
 
@@ -62,11 +83,13 @@
         if($_REQUEST['edit'] == "New") {
           // $data['trangthai'] = 1;
           $message = "Thêm sự kiện mới";
-          $this->view->message = $this->model->checkEvent($data, $hoatdong, "create", $message);
+          $this->view->message = $this->model->themSuKien($data, $hoatdong, "create", $message);
+          // echo '<script><meta http-equiv="refresh" content="0;"/></script>';
         }
         else {
           $message = "Cập nhật sự kiện";
-          $this->view->message = $this->model->checkEvent($data, $hoatdong, "update", $message);
+          $this->view->message = $this->model->capNhatSuKien($data, $hoatdong, "update", $message);
+          // echo '<script><meta http-equiv="refresh" content="0;"/></script>';
         }
       }
     }

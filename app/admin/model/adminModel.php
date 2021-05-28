@@ -8,9 +8,14 @@ class adminModel extends Model {
     $url = $this->link."taikhoan/".$username;
     $result = $this->loaddulieu($url);
     $numrow=-1;
-    foreach($result as $key => $val){
-      $numrow=$key;
+    if($result) {
+      foreach($result as $key => $val){
+        $numrow=$key;
+      }
+    } else {
+      return false;
     }
+    
     if ($numrow>0) {
       return false;
     }elseif ($numrow == -1) {
@@ -87,39 +92,125 @@ class adminModel extends Model {
     // echo json_encode(["data" => true],JSON_UNESCAPED_UNICODE);
     
     $result = $this->themxoasua($url);
+    // $result = 1;
     if($result){
       // return [1, $message];
       echo json_encode(["data" => true],JSON_UNESCAPED_UNICODE);
+      // echo '<meta http-equiv="refresh" content="0;url=event.html"/>';
     }
     else {
       // return [0, $message];
       echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
+      // echo '<meta http-equiv="refresh" content="0;url=event.html"/>';
     }
   }
 
-  public function checkEvent($data, $hoatdong, $action, $message){
+  public function capNhatSuKien($data, $hoatdong, $action, $message) {
     $result = $this->getEvent();
     $count = 0;
     $mask = '';
     foreach($result as $val){
+      $sukien[] = $val['masukien'];
       if($val['trangthai'] == 1){
         $mask = $val['masukien'];
         $count++;
-        // echo $count;
-        // print_r($data);
-        // print_r($val);
-
       }
     }
-    // die();
-    if($count>0 && $mask != $data['masukien'] && $data['trangthai'] == 1){
-      // return [0, $message];
-      // print_r($data);
+    $now = date("Y-m-d");
+    $ngay = explode('-', $data['ngay']);
+    $date = date('Y-m-d',strtotime($ngay[1].'-'.$ngay[0].'-'.$ngay[2]));
+
+    if($mask == $data['masukien']) {
+      if($date > $now && $data['trangthai'] == 1) {
+        return $this->Event($data, $hoatdong, $action, $message);
+        // echo json_encode(["data" => "sap dien ra "],JSON_UNESCAPED_UNICODE);
+      } else if ($date <= $now && $data['trangthai'] == 0){
+        return $this->Event($data, $hoatdong, $action, $message);
+        // echo json_encode(["data" => "thoi gian qua khu su kien da dien ra "],JSON_UNESCAPED_UNICODE);
+      } else {
+        echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
+      }
+    } else {
+      if($count > 0) {
+        if($data['trangthai'] == 0 &&  $date <= $now) {
+          // echo json_encode(["data" => "dc cap nhat "],JSON_UNESCAPED_UNICODE);
+          return $this->Event($data, $hoatdong, $action, $message);
+        } else {
+          echo json_encode(["data" => "cut "],JSON_UNESCAPED_UNICODE);
+        }
+      } else {
+        if($data['trangthai'] == 1 &&  $date > $now) {
+          // echo json_encode(["data" => "dc cap nhat "],JSON_UNESCAPED_UNICODE);
+          return $this->Event($data, $hoatdong, $action, $message);
+        } else {
+          echo json_encode(["data" => "cut "],JSON_UNESCAPED_UNICODE);
+        }
+      }
+    }
+    // if($count > 0 && $data['trangthai'] == 1 && $mask == $data['masukien'] && $date <= $now){
+    //   echo json_encode(["data" => "chay vo false update"],JSON_UNESCAPED_UNICODE);
+    // } else {
+    //   return $this->Event($data, $hoatdong, $action, $message);
+    // }
+  }
+
+  public function themSuKien($data, $hoatdong, $action, $message){
+    $result = $this->getEvent();
+    $count = 0;
+    // $mask = '';
+    foreach($result as $val){
+      $sukien[] = $val['masukien'];
+      if($val['trangthai'] == 1){
+        $mask = $val['masukien'];
+        $count++;
+      }
+    }
+    $now = date("Y-m-d");
+    $ngay = explode('-', $data['ngay']);
+    $date = date('Y-m-d',strtotime($ngay[1].'-'.$ngay[0].'-'.$ngay[2]));
+
+    // if($date > $now) {
+    //    echo json_encode(["data" => "dung"],JSON_UNESCAPED_UNICODE);
+    // } else {
+    //    echo json_encode(["data" => "sai"],JSON_UNESCAPED_UNICODE);
+    // }
+    if($now < $date && !in_array($data['masukien'], $sukien) && $count == 0) {
+      return $this->Event($data, $hoatdong, $action, $message);
+      // echo json_encode(["data" => "duoc them moi"],JSON_UNESCAPED_UNICODE);
+    } else {
       echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
     }
-    else{
-      return $this->Event($data, $hoatdong, $action, $message);
-    }
+    // } else {
+    //   if($now >= $date) {
+
+    //   } else {
+
+    //   }
+    // }
+  
+    
+    // if($data['trangthai'] == 1) {
+    //   if($count == 0 && $masukien == $masukien) {
+    //     if(ngayquakhu)
+    //   }
+    // }
+
+    // if($action == 'update') {
+    //   if($data['trangthai'] == 1 && $date > $now){
+    //     return $this->Event($data, $hoatdong, $action, $message);
+    //   } else {
+    //     // return $this->Event($data, $hoatdong, $action, $message);
+    //     echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
+    //     // echo json_encode(["data" => "chay vo update"],JSON_UNESCAPED_UNICODE);
+    //   }
+    // } else {
+    //   if($date > $now && in_array($data['masukien'], $sukien)) {
+    //     return $this->Event($data, $hoatdong, $action, $message);
+    //   } else {
+    //     echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
+    //   }
+    // }
+    
   }
 
   public function getVe(){

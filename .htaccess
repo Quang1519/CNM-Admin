@@ -1,9 +1,9 @@
 RewriteEngine on
 
 
-ErrorDocument 403 /CNM/error.php
-ErrorDocument 404 /CNM/error.php
-ErrorDocument 500 /CNM/error.php
+ErrorDocument 403 /error.php
+ErrorDocument 404 /error.php
+ErrorDocument 500 /error.php
 
 RewriteRule ^()$ index.php?app=admin&controller=index&action=index [L]
 RewriteRule ^([-a-zA-Z0-9]+).html$ index.php?app=admin&controller=$1&action=index [L]

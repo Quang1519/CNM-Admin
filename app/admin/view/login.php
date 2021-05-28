@@ -19,7 +19,7 @@
                                     <a href="index.html">
                                         <span><img src="<?php echo constant("DIR_APP"); ?>admin\view\assets\images\logo-dark.png" alt="" height="70"></span>
                                     </a>
-                                    <p class="text-muted mb-4 mt-3">Nhạp tên đăng nhập và mật khẩu để truy cập quản lý.</p>
+                                    <p class="text-muted mb-4 mt-3">Nhập tên đăng nhập và mật khẩu để truy cập quản lý.</p>
                                 </div>
 
                                 <form name="login" method="POST">
