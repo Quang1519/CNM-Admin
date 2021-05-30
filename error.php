@@ -58,7 +58,7 @@
 	  font-family: 'Fredoka One', cursive;
 	  font-size: 168px;
 	  margin: 0px;
-	  color: #ff508e;
+	  color: #7266ba;
 	  text-transform: uppercase;
 	}
 
@@ -115,13 +115,13 @@
 	  font-weight: 700;
 	  border-radius: 15px;
 	  text-decoration: none;
-	  color: #39b1cb;
+	  color: #7266ba;
 	}
 
 	.notfound a>.arrow {
 	  position: relative;
 	  top: -2px;
-	  border: solid #39b1cb;
+	  border: solid #7266ba;
 	  border-width: 0 3px 3px 0;
 	  display: inline-block;
 	  padding: 3px;
@@ -163,7 +163,7 @@
 				<input type="text" placeholder="Search...">
 				<button type="button">Search</button>
 			</form> -->
-			<a href="index.html"><span class="arrow"></span>Trở lại trang chủ</a>
+			<a href="/index.html"><span class="arrow"></span>Trở lại trang chủ</a>
 		</div>
 	</div>
 
