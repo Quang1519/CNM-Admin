@@ -64,10 +64,10 @@
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="index.html">Quản lý</a></li>
                                             <!-- <li class="breadcrumb-item"><a href="">Pages</a></li> -->
-                                            <li class="breadcrumb-item active">Quản lý tài khoản</li>
+                                            <li class="breadcrumb-item active">Quản lý cộng tác viên</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Quản lý tài khoản</h4>
+                                    <h4 class="page-title">Quản lý cộng tác viên</h4>
                                 </div>
                             </div>
                         </div>
