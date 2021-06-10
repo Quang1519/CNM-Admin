@@ -177,6 +177,25 @@
                                           
                                         </div>
 
+                                        <div class="form-row" id="add">
+                                          <div class="col-md-12" id="remove">
+                                              <div class="form-group">
+                                               
+                                               <!--  <label for="phanquyen" class="col-form-label">Phân quyền</label>
+                                                <select id="phanquyen" class="form-control">
+                                                    <option value="0">Chọn</option>
+                                                    <option value="1">Xác nhận hoạt động</option>
+                                                    <option value="2">Xác nhận vé</option>
+                                                    <option value="3">Xác nhận chuyển vé</option>
+
+                                                </select> -->
+                                                <?php $this->page->createPhanCongHoatDong(); ?>
+                                           
+                                              </div>
+                                          </div>
+                                          
+                                        </div>
+
                                         <div class="form-row">
                                           <div class="col-md-12">
                                               <div class="form-group">
@@ -280,18 +299,32 @@
                     disabledButton();
                 }
             })
+            
+            let hoatdong = $("#remove");
+
+            function checkHoatDong(){
+                if($("#phanquyen").val() != 2) {
+                    $(hoatdong).remove();
+                } else {
+                    $("#add").append(hoatdong);
+                }
+            }
 
 
-            // $("#phanquyen").on("change", function () {
-            //         // console.log($("#phanquyen").val());
-            //     if($("#phanquyen").val() == 0) {
-            //         // console.log($("#phanquyen").val());
-            //         checkPassword();
-            //     } else {
-            //        checkPassword();
-            //         // console.log($("#phanquyen").val());
-            //     }
-            // });
+            $("#phanquyen").on("change", function () {
+                    // console.log($("#phanquyen").val());
+                if($("#phanquyen").val() == 2) {
+                    // console.log($("#phanquyen").val());
+                    // checkPassword();
+                    // console.log("âdas");
+
+                    $("#add").append(hoatdong);
+                } else {
+                    $("#remove").remove();
+                   // checkPassword();
+                    // console.log($("#phanquyen").val());
+                }
+            });
 
             $("#password").keyup(function() {
                checkPassword();
@@ -348,6 +381,7 @@
 
             $(".btn-create").on("click", function () {
                 // console.log(this);
+                
                 var myValue = $(this).data('val');
                 // $(".modal-body #bookId").val( myBookId );
 
@@ -373,6 +407,7 @@
                 $("#phanquyen").val(myValue.phanquyen);
                 $("#password").val('');
                 $("#reTypePassword").val('');
+                checkHoatDong();
                 // checkPassword();
                 // $(obj).find(".modal-body #lop").val(myValue.lop);
                 // $(obj).find(".modal-body #khoa").val(myValue.khoa);
@@ -386,6 +421,7 @@
                 // console.log(this);
                 // var myValue = $(this).data('val');
                 // $(".modal-body #bookId").val( myBookId );
+                
                 var obj = $("#update-modal");
                 // $(obj).find(".modal-body #remove").remove();
                 $(obj).find(".modal-footer #create").prop( "disabled", true );
@@ -404,6 +440,7 @@
                 $(obj).find(".modal-body #phanquyen").val(0);
                 $("#password").val('');
                 $("#reTypePassword").val('');
+                checkHoatDong();
                 // $(obj).find(".modal-body #ten").val('').attr("placeholder", "Trúc");
 
             });

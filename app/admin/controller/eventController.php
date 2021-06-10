@@ -79,6 +79,7 @@
         // $data['trangthai'] = $_REQUEST['customRadio'];
         $hoatdong = $_REQUEST['hoatdong'];
         // die($hoatdong);
+        $data['namhoc'] = $_REQUEST['namhocbatdau']."-".$_REQUEST['namhocketthuc'];
 
         if($_REQUEST['edit'] == "New") {
           // $data['trangthai'] = 1;

@@ -1,7 +1,7 @@
 <?php
   class congtacvienTable{
     public function createCongTacVienTable(){
-      $data = $this->data;
+      $data = $this->data['congtacvien'];
       // print_r($data);
       // die();
       if($data){
@@ -17,10 +17,10 @@
     {
       switch ($value) {
         case 1:
-          return 'Xác nhận hoạt động';
+          return 'Cấp phát vé';
           break;
         case 2:
-          return 'Xác nhận vé';
+          return 'Xác nhận hoạt động';
           break;
         case 3:
           return 'Xác nhận chuyển vé';
@@ -34,10 +34,22 @@
       }
     }
 
+    public function createPhanCongHoatDong()
+    {
+      $hoatdong = $this->data['sukien'][0]['hoatdong'];
+      $select = '  <label for="phanhoatdong" class="col-form-label">Phân công hoạt động</label>
+                      <select id="phanhoatdong" name="phanhoatdong" class="form-control">';
+      foreach ($hoatdong as $key => $value) {
+        $select .= '<option value="' . $value . '">' . $value . '</option>';
+      }
+      $select .= '</select>';
+      echo $select;
+    }
+
 
     public function createSelect()
     {
-      $quyen = [0 => 'Chọn',1 => 'Xác nhận hoạt động', 2 => 'Xác nhận vé', 3 => 'Xác nhận chuyển vé'];
+      $quyen = [0 => 'Chọn',1 => 'Cấp phát vé', 2 => 'Xác nhận hoạt động', 3 => 'Xác nhận chuyển vé'];
       $select = '  <label for="phanquyen" class="col-form-label">Phân quyền</label>
                       <select id="phanquyen" name="phanquyen" class="form-control">';
       foreach ($quyen as $key => $value) {

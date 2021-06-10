@@ -11,6 +11,12 @@
         $data['email'] = $_REQUEST['email'];
         $data['password'] = $_REQUEST['password'];
         $data['phanquyen'] = $_REQUEST['phanquyen'];
+        if(isset($_REQUEST['phanhoatdong'])) {
+          $data['hoatdong'] = $_REQUEST['phanhoatdong'];
+        } else {
+          $data['hoatdong'] = "";
+        }
+        
         
         if($_REQUEST['password'] == $_REQUEST['reTypePassword']) {
           if($_REQUEST['create'] == "New") {
@@ -30,7 +36,7 @@
       }
 
 
-      $this->view->data = $this->model->getCongTacVien();
+      $this->view->data = ["congtacvien" => $this->model->getCongTacVien(), "sukien" => $this->model->getSuKienHoatDong()];
       $this->view->render('congtacvien', 'congtacvienTable');
     }
 

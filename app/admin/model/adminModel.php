@@ -136,14 +136,14 @@ class adminModel extends Model {
           // echo json_encode(["data" => "dc cap nhat "],JSON_UNESCAPED_UNICODE);
           return $this->Event($data, $hoatdong, $action, $message);
         } else {
-          echo json_encode(["data" => "cut "],JSON_UNESCAPED_UNICODE);
+          echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
         }
       } else {
         if($data['trangthai'] == 1 &&  $date > $now) {
           // echo json_encode(["data" => "dc cap nhat "],JSON_UNESCAPED_UNICODE);
           return $this->Event($data, $hoatdong, $action, $message);
         } else {
-          echo json_encode(["data" => "cut "],JSON_UNESCAPED_UNICODE);
+          echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
         }
       }
     }
@@ -215,6 +215,12 @@ class adminModel extends Model {
 
   public function getVe(){
     $url = $this->makeUrl("/dangkyve");
+    return $this->loaddulieu($url);
+  }
+
+
+  public function getSuKienHoatDong(){
+    $url = $this->link."/sukien/trangthai";
     return $this->loaddulieu($url);
   }
 

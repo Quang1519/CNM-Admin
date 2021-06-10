@@ -137,8 +137,40 @@
                                               </div>
                                           </div>
                                       </div>
+                                      <div class="form-row">
+                                        <div class="col-md-12" >
+                                            <div class="form-group">
+                                                <label for="">Năm học</label>
+                                                <div class="form-row">
+                                                    <div class="col-md-6">
+                                                        <div class="input-group">
+                                                                <input type="text" name="namhocbatdau" id="namhocbatdau"  class="form-control datepicker" data-provide="datepicker" data-date-min-view-mode="2" placeholder="2021" data-date-autoclose="true"  required>
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="ti-calendar"></i></span>
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                Chọn thời gian bắt đầu năm học
+                                                              </div>
+                                                        </div>
 
-                                    
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                           <div class="input-group">
+                                                                <input type="text" name="namhocketthuc" id="namhocketthuc" class="form-control datepicker" data-provide="datepicker" placeholder="2022"data-date-autoclose="true" data-date-min-view-mode="2" required>
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="ti-calendar"></i></span>
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                Chọn thời gian kết thúc năm học
+                                                                </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                           </div>
+                                        </div>
+                                      </div>
 
                                       <div class="form-row">
                                           <div class="col-md-12">
@@ -310,7 +342,11 @@
 
         <script>
 
-
+            $(".datepicker").datepicker({
+                format: "yyyy",
+                viewMode: "years", 
+                minViewMode: "years"
+            });
 
            $("#form-check").submit(function(e) {
                 e.preventDefault();
@@ -355,7 +391,7 @@
                 // }
 
 
-                if(count == 8) {
+                if(count == 10) {
                     // $("btn-create").prop("disabled",false);
                     // console.log("dddd");
                     sendData(data);
@@ -428,7 +464,13 @@
                 var obj = $("#update-modal");
 
                 var time = myValue.thoigian.split("-");
-
+                var namhoc;
+                if(typeof myValue.namhoc !== 'undefined') {
+                   namhoc = myValue.namhoc.split("-");
+                } else {
+                    namhoc = ["2021", "2022"];
+                }
+                
 
                 $(obj).find(".modal-body #add").append(dienra);
 
@@ -453,6 +495,8 @@
                 }
                 
                 $(obj).find(".modal-body #masukien").val(myValue.masukien);
+                $(obj).find(".modal-body #namhocbatdau").val(namhoc[0]);
+                $(obj).find(".modal-body #namhocketthuc").val(namhoc[1]);
                 $(obj).find(".modal-body #ngay").val(myValue.ngay);
                 $(obj).find(".modal-body #timeStart").val(time[0]);
                 $(obj).find(".modal-body #timeEnd").val(time[1]);
@@ -475,6 +519,8 @@
                 $(obj).find(".modal-footer .btn-create").prop('value', 'New');
                 // $(".hidden").attr("placeholder", "Type here to search");
                 $(obj).find(".modal-body #masukien").val('').attr("placeholder", "IUHXXXX").attr("readonly", false);
+                $(obj).find(".modal-body #namhocbatdau").val('').attr("placeholder","2020");
+                $(obj).find(".modal-body #namhocketthuc").val('').attr("placeholder","2021");
                 $(obj).find(".modal-body #ngay").val('').attr("placeholder", "12/12/2020");
                 $(obj).find(".modal-body #timeStart").val('').attr("placeholder", "6:00");
                 $(obj).find(".modal-body #timeEnd").val('').attr("placeholder", "18:00");
@@ -548,6 +594,7 @@
                 url : 'event/edit.html',
                 data : getData,
                 success : function(response) {
+                    // console.log(response);
                   obj = JSON.parse(response);
                   // obj = response;
                   // console.log(response);
