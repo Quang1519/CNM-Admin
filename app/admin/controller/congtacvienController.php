@@ -14,7 +14,7 @@
         if(isset($_REQUEST['phanhoatdong'])) {
           $data['hoatdong'] = $_REQUEST['phanhoatdong'];
         } else {
-          $data['hoatdong'] = "";
+          $data['hoatdong'] = "0";
         }
         
         

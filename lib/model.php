@@ -4,17 +4,16 @@ class Model {
    function loaddulieu($url){
 
    	// if(is_readable($url)) {
-   	$get = file_get_contents($url);
+   	$get = @file_get_contents($url);
 		// if($get === false){
 		// 	return false;
 		// } else {
-		$ketqua = json_decode($get, true);
-		return $ketqua;
-		// }	
-	// } else {
-	// 	return false;
-	// }
-   		
+   	if($get) {
+   		$ketqua = json_decode($get, true);
+			return $ketqua;
+   	} else {
+   		return [false];
+   	}
 		
 	}
 
