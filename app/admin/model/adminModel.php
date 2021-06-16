@@ -100,7 +100,7 @@ class adminModel extends Model {
     }
     else {
       // return [0, $message];
-      echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
+      echo json_encode(["data" => "cut2"],JSON_UNESCAPED_UNICODE);
       // echo '<meta http-equiv="refresh" content="0;url=event.html"/>';
     }
   }
@@ -110,7 +110,7 @@ class adminModel extends Model {
     $count = 0;
     $mask = '';
     foreach($result as $val){
-      $sukien[] = $val['masukien'];
+      // $sukien[] = $val['masukien'];
       if($val['trangthai'] == 1){
         $mask = $val['masukien'];
         $count++;
@@ -131,21 +131,22 @@ class adminModel extends Model {
         echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
       }
     } else {
-      if($count > 0) {
-        if($data['trangthai'] == 0 &&  $date <= $now) {
+      // if($count > 0) {
+        if($data['trangthai'] == 0 &&  $date <= $now ) {
           // echo json_encode(["data" => "dc cap nhat "],JSON_UNESCAPED_UNICODE);
           return $this->Event($data, $hoatdong, $action, $message);
+        } else if($data['trangthai'] == 1 &&  $date > $now && $count == 0) {
+          return $this->Event($data, $hoatdong, $action, $message);
+          // echo json_encode(["data" => ["vocaitren",$mask, $data['masukien']]],JSON_UNESCAPED_UNICODE);
+        // }
+      // } else {
+        // if($data['trangthai'] == 1 &&  $date > $now) {
+        //   // echo json_encode(["data" => "dc cap nhat "],JSON_UNESCAPED_UNICODE);
+        //   return $this->Event($data, $hoatdong, $action, $message);
         } else {
           echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
         }
-      } else {
-        if($data['trangthai'] == 1 &&  $date > $now) {
-          // echo json_encode(["data" => "dc cap nhat "],JSON_UNESCAPED_UNICODE);
-          return $this->Event($data, $hoatdong, $action, $message);
-        } else {
-          echo json_encode(["data" => false],JSON_UNESCAPED_UNICODE);
-        }
-      }
+      // }
     }
     // if($count > 0 && $data['trangthai'] == 1 && $mask == $data['masukien'] && $date <= $now){
     //   echo json_encode(["data" => "chay vo false update"],JSON_UNESCAPED_UNICODE);

@@ -393,7 +393,7 @@
 
                 if(count == 10) {
                     // $("btn-create").prop("disabled",false);
-                    // console.log("dddd");
+                    console.log("dddd");
                     sendData(data);
                     // console.log(data);
                 } 
@@ -446,7 +446,7 @@
               data['trangthai'] = $("input[name=customRadio]:checked").val();
               data['edit'] = 'Update';
               var message = 'Cập nhật sự kiện';
-              console.log(data);
+              // console.log(data);
               // console.log("cap nhat su kien");
               senRequest(data, message);
             }
@@ -594,7 +594,7 @@
                 url : 'event/edit.html',
                 data : getData,
                 success : function(response) {
-                    // console.log(response);
+                    console.log(response);
                   obj = JSON.parse(response);
                   // obj = response;
                   // console.log(response);

@@ -336,14 +336,26 @@
 
 
             $(".btn-del").click(function() {
+
                 // console.log('asdfasdfd');
                 // var data = $(this).data('del');
                 // console.log($(this).data('del'));
-                console.log($(this).data('del').uid);
+                data = $(this).data('del');
+                // data = undefined;
+                Notiflix.Confirm.Show('Thông báo','Bạn chắc chắn muốn xóa tài khoản này?','Xác nhận','Hủy',
+                    function(){
+                        sendRequest(data);
+                    });                
+                return false;
+            })
+
+            function sendRequest(value) {
+                // console.log(value);
                 $.ajax({
                 type : 'POST', //kiểu post
                 url  : 'congtacvien/delCongTacVien.html', //gửi dữ liệu sang trang submit.php
-                data : $(this).data('del'),
+                // data : $(this).data('del'),
+                data : value,
                 success :  function(data)
                        {
                             // if (data == 'false')
@@ -366,14 +378,13 @@
                             } else {
                               Notiflix.Report.Failure( 'Xóa tài khoản thất bại', '', 'Xác nhận', function(){
                               // window.location.reload();
-                              window.location.href = 'congtacvien.html';
+                              // window.location.href = 'congtacvien.html';
                             } );
                             }
                             // console.log(data);
                        }
                 });
-                return false;
-            })
+            }
           
 
 
